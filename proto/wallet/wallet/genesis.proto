@@ -1,0 +1,17 @@
+syntax = "proto3";
+package wallet.wallet;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "wallet/wallet/params.proto";
+
+option go_package = "wallet/x/wallet/types";
+
+// GenesisState defines the wallet module's genesis state.
+message GenesisState {
+  // params defines all the parameters of the module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+}

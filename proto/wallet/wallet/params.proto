@@ -1,0 +1,15 @@
+syntax = "proto3";
+package wallet.wallet;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "wallet/x/wallet/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (amino.name) = "wallet/x/wallet/Params";
+  option (gogoproto.equal) = true;
+
+  
+}

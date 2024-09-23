@@ -1,0 +1,11 @@
+syntax = "proto3";
+package wallet.wallet;
+
+option go_package = "wallet/x/wallet/types";
+
+message Wallet {
+  
+  uint64 balance = 1; 
+  uint64 id = 2; 
+  string creator = 3; 
+}

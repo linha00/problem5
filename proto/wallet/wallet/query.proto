@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package wallet.wallet;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "wallet/wallet/params.proto";
+import "wallet/wallet/wallet.proto";
+
+option go_package = "wallet/x/wallet/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  
+  // Parameters queries the parameters of the module.
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/wallet/wallet/params";
+  
+  }
+  
+  // Queries a list of ShowWallet items.
+  rpc ShowWallet (QueryShowWalletRequest) returns (QueryShowWalletResponse) {
+    option (google.api.http).get = "/wallet/wallet/show_wallet/{id}";
+  
+  }
+  
+  // Queries a list of ListWallet items.
+  rpc ListWallet (QueryListWalletRequest) returns (QueryListWalletResponse) {
+    option (google.api.http).get = "/wallet/wallet/list_wallet";
+  
+  }
+}
+// QueryParamsRequest is request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+// QueryParamsResponse is response type for the Query/Params RPC method.
+message QueryParamsResponse {
+  
+  // params holds all the parameters of this module.
+  Params params = 1 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+}
+
+message QueryShowWalletRequest {
+  uint64 id = 1;
+}
+
+message QueryListWalletRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryShowWalletResponse {
+  Wallet wallet = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryListWalletResponse {
+  repeated Wallet wallet = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
